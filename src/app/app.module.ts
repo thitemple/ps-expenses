@@ -1,16 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import {
+  MatButtonModule,
+  MatTabsModule,
+  MatTableModule,
+  MatIconModule,
+  MatSliderModule,
+  MatSidenavModule
+} from '@angular/material';
+import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './app.component';
+import { PsRootComponent } from './root.component';
+import { CreateReportComponent } from './create-report.component';
+import { ReportsComponent } from './reports.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    PsRootComponent,
+    ReportsComponent,
+    CreateReportComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatTableModule,
+    MatIconModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [PsRootComponent]
 })
-export class AppModule { }
+export class PsExpensesModule { }

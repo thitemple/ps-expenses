@@ -1,0 +1,30 @@
+<a mat-raised-button routerLink="/reports/create">New report</a>
+
+<h2>Reports</h2>
+
+<mat-table #table [dataSource]="reports">
+    <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+        <mat-cell *matCellDef="let report"> {{report.description}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-cell *matCellDef="let report"> {{report.date | date}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+        <mat-cell *matCellDef="let report"> {{report.amount | currency}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="approved">
+        <mat-header-cell *matHeaderCellDef> Approved </mat-header-cell>
+        <mat-cell *matCellDef="let report">
+            <mat-icon *ngIf="report.approved">check</mat-icon>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
