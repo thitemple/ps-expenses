@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Add new item</h1>
+<div mat-dialog-content class="create-report-item-form-content">
+    <mat-form-field>
+        <input matInput placeholder="Item description">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Amount" type="number">
+    </mat-form-field>
+
+    <!-- <mat-form-field>
+        <mat-checkbox [(ngModel)]="hasComprovante">Has COMPROVANTE</mat-checkbox>
+    </mat-form-field> -->
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+</div>
