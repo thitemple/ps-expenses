@@ -7,7 +7,9 @@ import {
   MatTableModule,
   MatIconModule,
   MatSliderModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatCardModule,
+  MatInputModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
@@ -29,7 +31,9 @@ import { AppRoutingModule } from './app-routing.module';
     MatButtonModule,
     MatTabsModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [PsRootComponent]
