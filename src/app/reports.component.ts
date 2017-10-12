@@ -38,7 +38,7 @@ const data: Report[] = [{
     description: 'Dining with client'
 }];
 
-export class ExampleDataSource extends DataSource<any> {
+export class ReportsDataSource extends DataSource<any> {
     /** Connect function called by the table to retrieve one stream containing the data to render. */
     connect(): Observable<Report[]> {
         return Observable.of(data);
@@ -52,6 +52,6 @@ export class ExampleDataSource extends DataSource<any> {
     templateUrl: './reports.component.html'
 })
 export class ReportsComponent {
-    reports = new ExampleDataSource();
+    reports = new ReportsDataSource();
     displayedColumns = ['description', 'date', 'amount', 'approved'];
 }

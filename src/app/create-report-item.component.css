@@ -1,0 +1,7 @@
+.create-report-item-form-content {
+    height: 200px;
+}
+
+.create-report-item-form-content > * {
+    width: 100%;
+}

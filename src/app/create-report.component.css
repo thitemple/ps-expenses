@@ -2,12 +2,7 @@
     flex: 1 1 auto;
 }
 
-.create-report-form-content, .create-report-item-form-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.create-report-form-content > *, .create-report-item-form-content > * {
+.create-report-form-content > * {
     width: 100%;
 }
 

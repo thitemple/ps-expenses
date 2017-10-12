@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatTabsModule,
@@ -33,6 +34,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    FormsModule,
     MatButtonModule,
     MatTabsModule,
     MatTableModule,
@@ -44,6 +46,6 @@ import { AppRoutingModule } from './app-routing.module';
     MatCheckboxModule
   ],
   providers: [],
-  bootstrap: [PsRootComponent]
+  bootstrap: [PsRootComponent, CreateReportItemDialogComponent]
 })
 export class PsExpensesModule { }

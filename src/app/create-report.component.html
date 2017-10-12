@@ -14,6 +14,29 @@
                 <mat-icon aria-label="Add new item">playlist_add</mat-icon>
             </button>
         </mat-toolbar>
+
+        <mat-table #table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.amount | currency}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="hasReceipt">
+                <mat-header-cell *matHeaderCellDef> Has receipt </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <mat-icon *ngIf="item.hasReceipt">check</mat-icon>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
     </mat-card-content>
 </mat-card>
 
