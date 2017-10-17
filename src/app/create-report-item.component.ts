@@ -1,10 +1,20 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
+enum ReportItemType {
+    food = 'Food',
+    travel = 'Travel',
+    training = 'Training',
+    transport = 'Transport',
+    unselected = ''
+}
+
 export type ReportItem = {
     description: string;
     amount: number;
     hasReceipt: boolean;
+    type: ReportItemType;
+    date: Date;
 };
 
 @Component({
@@ -17,8 +27,18 @@ export class CreateReportItemDialogComponent {
     item: ReportItem = {
         description: '',
         amount: 0,
-        hasReceipt: false
+        hasReceipt: false,
+        type: ReportItemType.unselected,
+        date: new Date()
     };
+
+    itemTypeOptions: ReportItemType[] = [
+        ReportItemType.unselected,
+        ReportItemType.food,
+        ReportItemType.training,
+        ReportItemType.transport,
+        ReportItemType.travel
+    ];
 
     constructor(private dialogRef: MatDialogRef<CreateReportItemDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private data: any) { }

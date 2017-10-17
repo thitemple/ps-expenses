@@ -8,6 +8,18 @@
         <input matInput placeholder="Amount" type="number" [(ngModel)]="item.amount">
     </mat-form-field>
 
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="expense type" [(ngModel)]="item.type">
+            <mat-option *ngFor="let opt of itemTypeOptions" [value]="opt">{{opt}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <mat-checkbox [(ngModel)]="item.hasReceipt">Has receipt</mat-checkbox>
 </div>
 <div mat-dialog-actions>

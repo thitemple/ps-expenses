@@ -5,43 +5,19 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-
-type Report = {
-    date: Date;
-    amount: number;
-    approved: boolean;
-    description: string;
-};
-
-const data: Report[] = [{
-    date: new Date(2017, 5, 6),
-    amount: 99,
-    approved: true,
-    description: 'Dining with client'
-},
-{
-    date: new Date(2017, 6, 1),
-    amount: 110.5,
-    approved: false,
-    description: 'Dining with client'
-},
-{
-    date: new Date(2017, 7, 1),
-    amount: 42,
-    approved: true,
-    description: 'Dining with client'
-},
-{
-    date: new Date(2017, 8, 1),
-    amount: 88.65,
-    approved: false,
-    description: 'Dining with client'
-}];
+import { Report, ReportDataService } from './services/reportData.service';
 
 export class ReportsDataSource extends DataSource<any> {
-    /** Connect function called by the table to retrieve one stream containing the data to render. */
+
+    constructor(private dataSource: ReportDataService) {
+        super();
+    }
+
     connect(): Observable<Report[]> {
-        return Observable.of(data);
+        return this
+            .dataSource
+            .dataChange
+            .map(data => data);
     }
 
     disconnect() { }
@@ -52,6 +28,10 @@ export class ReportsDataSource extends DataSource<any> {
     templateUrl: './reports.component.html'
 })
 export class ReportsComponent {
-    reports = new ReportsDataSource();
+    reports: ReportsDataSource;
     displayedColumns = ['description', 'date', 'amount', 'approved'];
+
+    constructor(reportDataService: ReportDataService) {
+        this.reports = new ReportsDataSource(reportDataService);
+    }
 }

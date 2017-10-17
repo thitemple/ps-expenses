@@ -13,7 +13,10 @@ import {
   MatInputModule,
   MatToolbarModule,
   MatDialogModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
@@ -22,6 +25,7 @@ import { CreateReportComponent } from './create-report.component';
 import { CreateReportItemDialogComponent } from './create-report-item.component';
 import { ReportsComponent } from './reports.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ReportDataService} from './services/reportData.service';
 
 @NgModule({
   declarations: [
@@ -43,9 +47,12 @@ import { AppRoutingModule } from './app-routing.module';
     MatInputModule,
     MatToolbarModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [ReportDataService],
   bootstrap: [PsRootComponent, CreateReportItemDialogComponent]
 })
 export class PsExpensesModule { }

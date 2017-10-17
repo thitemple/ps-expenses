@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class CreateReportComponent {
 
     dataSource: ReportItemsDataSource;
-    displayedColumns = ['description', 'amount', 'hasReceipt'];
+    displayedColumns = ['description', 'amount', 'type', 'date', 'hasReceipt'];
     itemsDataBase: ReportItemDatabase;
 
     constructor(private location: Location,
@@ -32,8 +32,14 @@ export class CreateReportComponent {
             width: '525px',
         });
         dialogRef.afterClosed().subscribe(item => {
-            this.itemsDataBase.addReportItem(item);
+            if (item) {
+                this.itemsDataBase.addReportItem(item);
+            }
         });
+    }
+
+    save(): void {
+
     }
 }
 
