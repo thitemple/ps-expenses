@@ -3,6 +3,11 @@
 <h1 class="mat-h1">Reports</h1>
 
 <mat-table #table [dataSource]="reports">
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+        <mat-cell *matCellDef="let report"> {{report.id}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
         <mat-cell *matCellDef="let report"> {{report.description}} </mat-cell>

@@ -4,7 +4,15 @@
     </mat-card-header>
     <mat-card-content class="create-report-form-content">
         <mat-form-field>
-            <input matInput placeholder="Description">
+            <input
+                matInput
+                placeholder="Description"
+                required
+                [(ngModel)]="description"
+                #descript="ngModel">
+            <div *ngIf="descript.invalid && (descript.dirty || descript.touched)"
+                class="alert alert-danger">
+            </div>
         </mat-form-field>
 
         <mat-toolbar color="primary">

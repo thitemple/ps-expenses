@@ -29,7 +29,7 @@ export class ReportsDataSource extends DataSource<any> {
 })
 export class ReportsComponent {
     reports: ReportsDataSource;
-    displayedColumns = ['description', 'date', 'amount', 'approved'];
+    displayedColumns = ['id', 'description', 'date', 'amount', 'approved'];
 
     constructor(reportDataService: ReportDataService) {
         this.reports = new ReportsDataSource(reportDataService);

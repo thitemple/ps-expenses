@@ -5,6 +5,7 @@ import { CreateReportItemDialogComponent, ReportItem } from './create-report-ite
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ReportDataService, Report } from './services/reportData.service';
 
 @Component({
     selector: 'ps-create-report',
@@ -12,13 +13,15 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
     styleUrls: ['./create-report.component.css']
 })
 export class CreateReportComponent {
+    description = '';
 
     dataSource: ReportItemsDataSource;
     displayedColumns = ['description', 'amount', 'type', 'date', 'hasReceipt'];
     itemsDataBase: ReportItemDatabase;
 
     constructor(private location: Location,
-        private dialog: MatDialog) {
+        private dialog: MatDialog,
+        private  reportDataService: ReportDataService) {
         this.itemsDataBase = new ReportItemDatabase();
         this.dataSource = new ReportItemsDataSource(this.itemsDataBase);
     }
@@ -39,7 +42,16 @@ export class CreateReportComponent {
     }
 
     save(): void {
-
+        const newReport: Report = {
+            date: new Date(),
+            approved: false,
+            description: this.description,
+            amount: this.itemsDataBase.data.reduce((total, item) => total + item.amount, 0),
+            items: this.itemsDataBase.data,
+            id: this.reportDataService.data.reduce((biggestId, report) => biggestId > report.id ? biggestId : report.id, 0) + 1
+        };
+        this.reportDataService.addReportItem(newReport);
+        this.location.back();
     }
 }
 
