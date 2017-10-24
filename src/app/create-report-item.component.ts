@@ -1,21 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-
-enum ReportItemType {
-    food = 'Food',
-    travel = 'Travel',
-    training = 'Training',
-    transport = 'Transport',
-    unselected = ''
-}
-
-export type ReportItem = {
-    description: string;
-    amount: number;
-    hasReceipt: boolean;
-    type: ReportItemType;
-    date: Date;
-};
+import { ReportItem, ReportItemType, ReportItemService } from './services/reportItem.service';
 
 @Component({
     selector: 'ps-create-report-item',
@@ -41,5 +26,12 @@ export class CreateReportItemDialogComponent {
     ];
 
     constructor(private dialogRef: MatDialogRef<CreateReportItemDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) private data: any) { }
+        @Inject(MAT_DIALOG_DATA) private data: any,
+        private reportItemService: ReportItemService) { }
+
+        addItem(item: ReportItem) {
+            if (this.reportItemService.isValid(item)) {
+                this.dialogRef.close(item);
+            }
+        }
 }

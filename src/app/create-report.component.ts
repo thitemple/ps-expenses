@@ -1,11 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CreateReportItemDialogComponent, ReportItem } from './create-report-item.component';
+import { CreateReportItemDialogComponent } from './create-report-item.component';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReportDataService, Report } from './services/reportData.service';
+import { ReportItem } from './services/reportItem.service';
 
 @Component({
     selector: 'ps-create-report',
@@ -46,9 +47,7 @@ export class CreateReportComponent {
             date: new Date(),
             approved: false,
             description: this.description,
-            amount: this.itemsDataBase.data.reduce((total, item) => total + item.amount, 0),
-            items: this.itemsDataBase.data,
-            id: this.reportDataService.data.reduce((biggestId, report) => biggestId > report.id ? biggestId : report.id, 0) + 1
+            items: this.itemsDataBase.data
         };
         this.reportDataService.addReportItem(newReport);
         this.location.back();

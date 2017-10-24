@@ -20,7 +20,7 @@
 
     <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
-        <mat-cell *matCellDef="let report"> {{report.amount | currency}} </mat-cell>
+        <mat-cell *matCellDef="let report"> {{report.amount() | currency}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="approved">
