@@ -49,7 +49,7 @@ export class CreateReportComponent {
             description: this.description,
             items: this.itemsDataBase.data
         };
-        this.reportDataService.addReport(newReport);
+        this.reportDataService.add(newReport);
         this.location.back();
     }
 }

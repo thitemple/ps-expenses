@@ -29,13 +29,21 @@ export class ReportDataService {
         return this.dataChange.value;
     }
 
-    addReport(report: Report) {
+    add(report: Report) {
         const newReport = {
             ...report,
             id: this.data.reduce((biggestId, rep) => biggestId > rep.id ? biggestId : rep.id, 0) + 1,
             amount: report.items.reduce((sum, item) => sum + item.amount, 0)
         };
         const newData = [...this.data, newReport];
+        this._window.localStorage.setItem(psReportsKey, JSON.stringify(newData));
+        this.dataChange.next(newData);
+    }
+
+    save(report: Report) {
+        const reportIndex = this.data.findIndex(r => r.id === report.id);
+        const newData = [...this.data];
+        newData.splice(reportIndex, 1, report);
         this._window.localStorage.setItem(psReportsKey, JSON.stringify(newData));
         this.dataChange.next(newData);
     }

@@ -44,10 +44,15 @@ export class ReportsComponent {
     }
 
     approve(report: Report) {
-        report.approved = true;
+        this.toggleApproval(report, true);
     }
 
     reject(report: Report) {
-        report.approved = false;
+        this.toggleApproval(report, false);
+    }
+
+    private toggleApproval(report: Report, approved: boolean) {
+        report.approved = approved;
+        this.reportDataService.save(report);
     }
 }
