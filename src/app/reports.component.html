@@ -20,13 +20,27 @@
 
     <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
-        <mat-cell *matCellDef="let report"> {{report.amount() | currency}} </mat-cell>
+        <mat-cell *matCellDef="let report"> {{report.amount | currency}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="approved">
         <mat-header-cell *matHeaderCellDef> Approved </mat-header-cell>
         <mat-cell *matCellDef="let report">
             <mat-icon *ngIf="report.approved">check</mat-icon>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let report">
+            <div *ngIf="isAdmin">
+                <button mat-icon-button color="primary" (click)="approve(report)">
+                    <mat-icon>check_circle</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="reject(report)">
+                    <mat-icon>highlight_off</mat-icon>
+                </button>
+            </div>
         </mat-cell>
     </ng-container>
 

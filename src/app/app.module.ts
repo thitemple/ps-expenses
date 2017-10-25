@@ -27,6 +27,7 @@ import { ReportsComponent } from './reports.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReportDataService} from './services/reportData.service';
 import { ReportItemService } from './services/reportItem.service';
+import { WindowService } from './services/window.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,14 @@ import { ReportItemService } from './services/reportItem.service';
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [ReportDataService, ReportItemService],
+  providers: [
+    ReportDataService,
+    ReportItemService,
+    {
+      provide: WindowService,
+      useValue: window
+    }
+  ],
   bootstrap: [PsRootComponent, CreateReportItemDialogComponent]
 })
 export class PsExpensesModule { }
