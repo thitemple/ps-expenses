@@ -52,7 +52,7 @@ export class ReportItemService {
         switch (item.type) {
             case ReportItemType.food: {
                 const validatedFood = validateFoodItem(item);
-                if (!validateDate[0]) {
+                if (!validatedFood[0]) {
                     return validatedFood;
                 }
                 return this.validateDate(item);
@@ -61,14 +61,14 @@ export class ReportItemService {
             case ReportItemType.transport:
             case ReportItemType.travel: {
                 const validatedReceipt = validateReceipt(item);
-                if (!validateDate[0]) {
+                if (!validatedReceipt[0]) {
                     return validatedReceipt;
                 }
                 return this.validateDate(item);
             }
             case ReportItemType.unselected:
             default:
-                return [false, 'The item is not supported'];
+                return [false, 'The item type is not supported'];
         }
     }
 }

@@ -1,4 +1,5 @@
 <h1 mat-dialog-title>Add new item</h1>
+<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
 <div mat-dialog-content class="create-report-item-form-content">
     <mat-form-field>
         <input matInput placeholder="Item description" [(ngModel)]="item.description">
@@ -9,7 +10,7 @@
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="item.date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

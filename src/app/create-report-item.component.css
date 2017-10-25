@@ -5,3 +5,7 @@
 .create-report-item-form-content > * {
     width: 100%;
 }
+
+.mat-error {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}

@@ -25,12 +25,16 @@ export class CreateReportItemDialogComponent {
         ReportItemType.travel
     ];
 
+    errorMessage = '';
+
     constructor(private dialogRef: MatDialogRef<CreateReportItemDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private data: any,
         private reportItemService: ReportItemService) { }
 
         addItem(item: ReportItem) {
-            if (this.reportItemService.isValid(item)) {
+            let isValid = false;
+            [isValid, this.errorMessage] = this.reportItemService.isValid(item);
+            if (isValid) {
                 this.dialogRef.close(item);
             }
         }

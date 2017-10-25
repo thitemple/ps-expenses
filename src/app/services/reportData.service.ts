@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ReportItem } from '../create-report-item.component';
+import { ReportItem } from './reportItem.service';
 
 export type Report = {
     id?: number;
