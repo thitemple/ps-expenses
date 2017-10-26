@@ -15,7 +15,6 @@ import { ReportItem } from './services/reportItem.service';
 })
 export class CreateReportComponent {
     description = '';
-
     dataSource: ReportItemsDataSource;
     displayedColumns = ['description', 'amount', 'type', 'date', 'hasReceipt'];
     itemsDataBase: ReportItemDatabase;
@@ -62,7 +61,13 @@ class ReportItemDatabase {
     }
 
     addReportItem(item: ReportItem) {
-        const newData = [...this.data, item];
+        let newData = [];
+
+        this.data.forEach(element => {
+            newData.push(element);
+        });
+        newData.push(item);
+
         this.dataChange.next(newData);
     }
 }

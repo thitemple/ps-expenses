@@ -38,4 +38,10 @@ export class CreateReportItemDialogComponent {
                 this.dialogRef.close(item);
             }
         }
+
+    private updateErrorMessage([hasError, message]: [boolean, string]): void {
+        if (hasError) {
+            this.errorMessage = message;
+        }
+    }
 }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   MatButtonModule,
@@ -28,6 +28,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReportDataService} from './services/reportData.service';
 import { ReportItemService } from './services/reportItem.service';
 import { WindowService } from './services/window.service';
+import { MessengerWatcher } from './services/messenger.service';
+
+const initMessengerWatcher = messengerWatcher => () => {
+  messengerWatcher.watch();
+}
 
 @NgModule({
   declarations: [
@@ -57,6 +62,17 @@ import { WindowService } from './services/window.service';
   providers: [
     ReportDataService,
     ReportItemService,
+    {
+      provide: MessengerWatcher,
+      deps: [ReportDataService],
+      useFactory: reportDataService => new MessengerWatcher(reportDataService) 
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initMessengerWatcher,
+      deps: [MessengerWatcher],
+      multi: true
+    },
     {
       provide: WindowService,
       useValue: window

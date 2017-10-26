@@ -28,7 +28,7 @@ function validateReceipt(item: ReportItem): [boolean, string] {
     return [item.hasReceipt, message];
 }
 
-const validateDate = (minDate: Date, maxDate: Date) => (item: ReportItem): [boolean, string] => {
+const validateDate = (minDate: Date, maxDate: Date) => (item): [boolean, string] => {
     const message = +item.date >= +minDate && +item.date <= +maxDate ? '' : 'The date is invalid';
     return [message === '', message];
 };

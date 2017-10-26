@@ -33,7 +33,7 @@
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let report">
-            <div *ngIf="isAdmin">
+            <div *ngIf="isAdmin | async">
                 <button mat-icon-button color="primary" (click)="approve(report)">
                     <mat-icon>check_circle</mat-icon>
                 </button>

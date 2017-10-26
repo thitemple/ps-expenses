@@ -37,6 +37,7 @@ export class ReportsComponent {
     reports: ReportsDataSource;
     isAdmin = Observable.of(false);
     displayedColumns = ['id', 'description', 'date', 'amount', 'approved', 'actions'];
+    private isLoading: boolean;
 
     constructor(private route: ActivatedRoute, private reportDataService: ReportDataService) {
         this.reports = new ReportsDataSource(reportDataService);

@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReportItem } from './reportItem.service';
 import { WindowService } from './window.service';
+import { Subject } from 'rxjs/Subject';
 
 export type Report = {
     id?: number;
@@ -17,6 +18,7 @@ const psReportsKey = 'ps-reports';
 @Injectable()
 export class ReportDataService {
     dataChange = new BehaviorSubject<Report[]>([]);
+    reportCreated = new Subject();
 
     constructor(@Inject(WindowService) private _window: Window) {
         const stringfiedReports = _window.localStorage.getItem(psReportsKey);
@@ -36,15 +38,19 @@ export class ReportDataService {
             amount: report.items.reduce((sum, item) => sum + item.amount, 0)
         };
         const newData = [...this.data, newReport];
-        this._window.localStorage.setItem(psReportsKey, JSON.stringify(newData));
-        this.dataChange.next(newData);
+        this.updateData(newData);
+        this.reportCreated.next(newReport);
     }
 
     save(report: Report) {
         const reportIndex = this.data.findIndex(r => r.id === report.id);
         const newData = [...this.data];
         newData.splice(reportIndex, 1, report);
-        this._window.localStorage.setItem(psReportsKey, JSON.stringify(newData));
-        this.dataChange.next(newData);
+        this.updateData(newData);
+    }
+
+    private updateData(reports: Report[]) {
+        this._window.localStorage.setItem(psReportsKey, JSON.stringify(reports));
+        this.dataChange.next(reports);
     }
 }
