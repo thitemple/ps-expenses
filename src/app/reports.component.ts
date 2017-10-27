@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 import { Report, ReportDataService } from './services/reportData.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -54,6 +55,10 @@ export class ReportsComponent {
 
     private toggleApproval(report: Report, approved: boolean) {
         report.approved = approved;
-        this.reportDataService.save(report);
+        const user = this.route
+            .queryParamMap
+            .take(1)
+            .subscribe(params => this.reportDataService.save(report, params.get('user')));
+        
     }
 }

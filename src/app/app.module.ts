@@ -30,9 +30,11 @@ import { ReportItemService } from './services/reportItem.service';
 import { WindowService } from './services/window.service';
 import { MessengerWatcher } from './services/messenger.service';
 
-const initMessengerWatcher = messengerWatcher => () => {
+export const initApp = messengerWatcher => () => {
   messengerWatcher.watch();
 }
+
+export const initMessengerWatcher = reportDataService => new MessengerWatcher(reportDataService);
 
 @NgModule({
   declarations: [
@@ -65,11 +67,11 @@ const initMessengerWatcher = messengerWatcher => () => {
     {
       provide: MessengerWatcher,
       deps: [ReportDataService],
-      useFactory: reportDataService => new MessengerWatcher(reportDataService) 
+      useFactory: initMessengerWatcher 
     },
     {
       provide: APP_INITIALIZER,
-      useFactory: initMessengerWatcher,
+      useFactory: initApp,
       deps: [MessengerWatcher],
       multi: true
     },
