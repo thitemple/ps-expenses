@@ -58,6 +58,10 @@ export class ReportItemService {
                 return this.validateDate(item);
             }
             case ReportItemType.training:
+                const validatedFood = validateFoodItem(item);
+                if (!validatedFood[0]) {
+                    return validatedFood;
+                }
             case ReportItemType.transport:
             case ReportItemType.travel: {
                 const validatedReceipt = validateReceipt(item);

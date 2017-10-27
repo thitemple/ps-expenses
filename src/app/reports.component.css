@@ -1,0 +1,12 @@
+.approved {
+    animation: highlight 1s;
+ }
+
+ @keyframes highlight {
+    0% {
+        background: lightgreen
+    }
+    100% {
+        background: none;
+    }
+}

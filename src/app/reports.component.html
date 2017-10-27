@@ -2,7 +2,7 @@
 
 <h1 class="mat-h1">Reports</h1>
 
-<mat-table #table [dataSource]="reports">
+<mat-table #table [dataSource]="reports" id="reports-list">
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
         <mat-cell *matCellDef="let report"> {{report.id}} </mat-cell>
@@ -26,7 +26,7 @@
     <ng-container matColumnDef="approved">
         <mat-header-cell *matHeaderCellDef> Approved </mat-header-cell>
         <mat-cell *matCellDef="let report">
-            <mat-icon *ngIf="report.approved">check</mat-icon>
+            <mat-icon *ngIf="report.approved" id="report${{report.id}}">check</mat-icon>
         </mat-cell>
     </ng-container>
 
