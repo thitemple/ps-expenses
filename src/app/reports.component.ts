@@ -69,7 +69,7 @@ export class ReportsComponent {
 
 
     private toggleApprovedStyle(reportId: number, approved: boolean) {
-        setTimeout(() => {
+        setTimeout(function () {
             const row = this._window.document.getElementById(`report$${reportId}`).closest("mat-row");
             toggleApprovedStyle.call(row, approved);
         }, 50);

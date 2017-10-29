@@ -18,8 +18,9 @@
     "noImplicitAny": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noImplicitReturns": false, // todo
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": false,
-    "noImplicitThis": true
+    "noImplicitThis": false,
+    "strictNullChecks": true
   }
 }

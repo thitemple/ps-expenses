@@ -32,15 +32,14 @@ export class CreateReportItemDialogComponent {
         private reportItemService: ReportItemService) { }
 
         addItem(item: ReportItem) {
-            let isValid = false;
-            [isValid, this.errorMessage] = this.reportItemService.isValid(item);
-            if (isValid) {
+            this.errorMessage = this.reportItemService.isValid(item);
+            if (!this.errorMessage) {
                 this.dialogRef.close(item);
             }
         }
 
-    private updateErrorMessage([hasError, message]: [boolean, string]): void {
-        if (hasError) {
+    private updateErrorMessage(message: string): void {
+        if (message) {
             this.errorMessage = message;
         }
     }
