@@ -21,6 +21,6 @@
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": false,
     "noImplicitThis": false,
-    "strictNullChecks": true
+    "strictNullChecks": false
   }
 }
