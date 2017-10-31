@@ -39,17 +39,14 @@ const validateDate = (minDate: Date, maxDate: Date) => (item): string => {
 
 @Injectable()
 export class ReportItemService {
-
-    private maxDate: Date;
-    private minDate: Date;
     private validateDate: (item: ReportItem) => string;
 
     constructor() {
         const today = new Date();
-        this.maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-        this.minDate = new Date(this.maxDate);
-        this.minDate.setMonth(-3);
-        this.validateDate = validateDate(this.minDate, this.maxDate);
+        const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const minDate = new Date(maxDate);
+        minDate.setMonth(-3);
+        this.validateDate = validateDate(minDate, maxDate);
     }
 
     isValid(item: ReportItem): string {
