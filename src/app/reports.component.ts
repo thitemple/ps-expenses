@@ -80,7 +80,7 @@ export class ReportsComponent {
         const user = this.route
             .queryParamMap
             .take(1)
-            .subscribe(params => this.reportDataService.save(report, params.get('user')));
+            .subscribe(params => this.reportDataService.toggleApproval(report, params.get('user')));
         
     }
 }

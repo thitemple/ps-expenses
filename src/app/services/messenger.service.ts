@@ -46,7 +46,7 @@ export class MessengerWatcher {
 
         this
             .ReportDataService
-            .reportUpdated
+            .reportApprovedReject
             .subscribe(({ report, user }) => {
                 getMessenger(`MessengerReport${report.approved ? 'Approved' : 'Rejected'}`)
                     .deliveryMessage(report, user);

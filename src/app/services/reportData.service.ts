@@ -19,7 +19,7 @@ const psReportsKey = 'ps-reports';
 export class ReportDataService {
     dataChange = new BehaviorSubject<Report[]>([]);
     reportCreated: Subject<Report> = new Subject();
-    reportUpdated: Subject<{ report: Report, user: string }> = new Subject();
+    reportApprovedReject: Subject<{ report: Report, user: string }> = new Subject();
 
     constructor(@Inject(WindowService) private _window: Window) {
         const stringfiedReports = _window.localStorage.getItem(psReportsKey);
@@ -49,12 +49,19 @@ export class ReportDataService {
         this.reportCreated.next(newReport);
     }
 
-    save(report: Report, user: string) {
+    save(report: Report) {
         const reportIndex = this.data.findIndex(r => r.id === report.id);
         const newData = [...this.data];
         newData.splice(reportIndex, 1, report);
         this.updateData(newData);
-        this.reportUpdated.next({ report, user });
+    }
+
+    toggleApproval(report: Report, user: string) {
+        const reportIndex = this.data.findIndex(r => r.id === report.id);
+        const newData = [...this.data];
+        newData.splice(reportIndex, 1, report);
+        this.updateData(newData);
+        this.reportApprovedReject.next({ report, user });
     }
 
     private updateData(reports: Report[]) {
