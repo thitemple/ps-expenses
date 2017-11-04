@@ -7,38 +7,22 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReportDataService, Report } from './services/reportData.service';
 import { ReportItem } from './services/reportItem.service';
+import { ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
+import { BaseReportComponent } from './base-report.component';
 
 @Component({
-    selector: 'ps-create-report',
-    templateUrl: './create-report.component.html',
-    styleUrls: ['./create-report.component.css']
+    selector: 'ps-report',
+    templateUrl: './report.component.html',
+    styleUrls: ['./report.component.css']
 })
-export class CreateReportComponent {
-    description = '';
-    dataSource: ReportItemsDataSource;
-    displayedColumns = ['description', 'amount', 'type', 'date', 'hasReceipt'];
-    itemsDataBase: ReportItemDatabase;
+export class CreateReportComponent extends BaseReportComponent {
 
-    constructor(private location: Location,
-        private dialog: MatDialog,
-        private  reportDataService: ReportDataService) {
-        this.itemsDataBase = new ReportItemDatabase();
-        this.dataSource = new ReportItemsDataSource(this.itemsDataBase);
-    }
-
-    cancel(): void {
-        this.location.back();
-    }
-
-    addItem(): void {
-        const dialogRef = this.dialog.open(CreateReportItemDialogComponent, {
-            width: '525px',
-        });
-        dialogRef.afterClosed().subscribe(item => {
-            if (item) {
-                this.itemsDataBase.addReportItem(item);
-            }
-        });
+    title = 'Create new expense report';
+    constructor(location: Location,
+        dialog: MatDialog,
+        reportDataService: ReportDataService) {
+        super(location, dialog, reportDataService);
     }
 
     save(): void {
@@ -51,36 +35,4 @@ export class CreateReportComponent {
         this.reportDataService.add(newReport);
         this.location.back();
     }
-}
-
-class ReportItemDatabase {
-    dataChange = new BehaviorSubject<ReportItem[]>([]);
-
-    get data(): ReportItem[] {
-        return this.dataChange.value;
-    }
-
-    addReportItem(item: ReportItem) {
-        let newData = [];
-
-        this.data.forEach(element => {
-            newData.push(element);
-        });
-        newData.push(item);
-
-        this.dataChange.next(newData);
-    }
-}
-
-class ReportItemsDataSource extends DataSource<any> {
-
-    constructor(private sourceDatabase: ReportItemDatabase) {
-        super();
-    }
-
-    connect(): Observable<ReportItem[]> {
-        return this.sourceDatabase.dataChange.map(data => data);
-    }
-
-    disconnect() { }
 }

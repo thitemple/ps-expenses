@@ -5,12 +5,16 @@
 <mat-table #table [dataSource]="reports" id="reports-list">
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-        <mat-cell *matCellDef="let report"> {{report.id}} </mat-cell>
+        <mat-cell *matCellDef="let report">
+                <a [routerLink]="['/reports', report.id]">{{report.id}}</a>
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-        <mat-cell *matCellDef="let report"> {{report.description}} </mat-cell>
+        <mat-cell *matCellDef="let report">
+            <a [routerLink]="['/reports', report.id]">{{report.description}}</a>
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="date">

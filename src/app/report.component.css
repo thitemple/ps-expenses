@@ -1,0 +1,15 @@
+.create-report-toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.create-report-form-content > * {
+    width: 100%;
+}
+
+.create-report-header {
+    margin-bottom: 20px;
+}
+
+.create-report {
+    margin-bottom: 20px;
+}

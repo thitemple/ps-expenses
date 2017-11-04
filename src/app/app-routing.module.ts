@@ -4,13 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { PsRootComponent } from './root.component';
 import { ReportsComponent } from './reports.component';
 import { CreateReportComponent } from './create-report.component';
+import { EditReportComponent } from './edit-report.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/reports', pathMatch: 'full' },
     { path: 'reports', component: ReportsComponent },
-    { path: 'reports/create', component: CreateReportComponent }
-    // { path: 'detail/:id', component: HeroDetailComponent },
-    // { path: 'heroes', component: HeroesComponent }
+    { path: 'reports/create', component: CreateReportComponent },
+    { path: 'reports/:id', component: EditReportComponent }
 ];
 
 @NgModule({

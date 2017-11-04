@@ -32,6 +32,12 @@ export class ReportDataService {
         return this.dataChange.value;
     }
 
+    getReport(reportId: number): Promise<Report> {
+        return this.data.some(r => r.id === reportId) ?
+            Promise.resolve(this.data.find(r => r.id === reportId)) :
+            Promise.resolve(undefined);
+    }
+
     add(report: Report) {
         const newReport = {
             ...report,

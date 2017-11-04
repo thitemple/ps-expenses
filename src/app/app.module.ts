@@ -29,6 +29,7 @@ import { ReportDataService} from './services/reportData.service';
 import { ReportItemService } from './services/reportItem.service';
 import { WindowService } from './services/window.service';
 import { MessengerWatcher } from './services/messenger.service';
+import { EditReportComponent } from './edit-report.component';
 
 export const initApp = messengerWatcher => () => {
   messengerWatcher.watch();
@@ -41,6 +42,7 @@ export const initMessengerWatcher = reportDataService => new MessengerWatcher(re
     PsRootComponent,
     ReportsComponent,
     CreateReportComponent,
+    EditReportComponent,
     CreateReportItemDialogComponent
   ],
   imports: [
