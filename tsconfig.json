@@ -15,12 +15,12 @@
       "es2017",
       "dom"
     ],
-    "noImplicitAny": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": false,
     "noImplicitThis": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
     "strictNullChecks": false
   }
 }
