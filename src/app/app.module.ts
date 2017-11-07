@@ -7,8 +7,6 @@ import {
   MatTabsModule,
   MatTableModule,
   MatIconModule,
-  MatSliderModule,
-  MatSidenavModule,
   MatCardModule,
   MatInputModule,
   MatToolbarModule,
@@ -18,7 +16,6 @@ import {
   MatDatepickerModule,
   MatNativeDateModule
 } from '@angular/material';
-import { RouterModule } from '@angular/router';
 
 import { PsRootComponent } from './root.component';
 import { CreateReportComponent } from './create-report.component';

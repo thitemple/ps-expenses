@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 import { ReportItem, ReportItemType, ReportItemService } from './services/reportItem.service';
 
 @Component({
@@ -28,7 +28,6 @@ export class CreateReportItemDialogComponent {
     errorMessage = '';
 
     constructor(private dialogRef: MatDialogRef<CreateReportItemDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) private data: any,
         private reportItemService: ReportItemService) { }
 
         addItem(item: ReportItem) {
@@ -37,10 +36,4 @@ export class CreateReportItemDialogComponent {
                 this.dialogRef.close(item);
             }
         }
-
-    private updateErrorMessage(message: string): void {
-        if (message) {
-            this.errorMessage = message;
-        }
-    }
 }

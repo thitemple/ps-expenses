@@ -1,5 +1,4 @@
-import { Component, Inject } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Component } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
@@ -8,7 +7,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import { Report, ReportDataService } from './services/reportData.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { WindowService } from './services/window.service';
 
 export class ReportsDataSource extends DataSource<any> {
 
@@ -48,11 +46,9 @@ export class ReportsComponent {
     reports: ReportsDataSource;
     isAdmin = Observable.of(false);
     displayedColumns = ['id', 'description', 'date', 'amount', 'approved', 'actions'];
-    private isLoading: boolean;
 
     constructor(private route: ActivatedRoute,
-        private reportDataService: ReportDataService,
-        @Inject(WindowService) private _window: Window) {
+        private reportDataService: ReportDataService) {
         this.reports = new ReportsDataSource(reportDataService);
         this.isAdmin = this.route.queryParamMap.map(mapUser);
     }
@@ -77,7 +73,7 @@ export class ReportsComponent {
 
     private toggleApproval(report: Report, approved: boolean) {
         report.approved = approved;
-        const user = this.route
+        this.route
             .queryParamMap
             .take(1)
             .subscribe(params => this.reportDataService.toggleApproval(report, params.get('user')));
