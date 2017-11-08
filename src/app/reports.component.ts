@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import { Report, ReportDataService } from './services/reportData.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { WindowService } from './services/window.service';
 
 export class ReportsDataSource extends DataSource<any> {
 
@@ -48,7 +49,8 @@ export class ReportsComponent {
     displayedColumns = ['id', 'description', 'date', 'amount', 'approved', 'actions'];
 
     constructor(private route: ActivatedRoute,
-        private reportDataService: ReportDataService) {
+        private reportDataService: ReportDataService,
+        @Inject(WindowService) private _window: Window) {
         this.reports = new ReportsDataSource(reportDataService);
         this.isAdmin = this.route.queryParamMap.map(mapUser);
     }
@@ -65,7 +67,7 @@ export class ReportsComponent {
 
 
     private toggleApprovedStyle(reportId: number, approved: boolean) {
-        setTimeout(function () {
+        setTimeout(() => {
             const row = this._window.document.getElementById(`report$${reportId}`).closest("mat-row");
             toggleApprovedStyle.call(row, approved);
         }, 50);
