@@ -59,7 +59,7 @@ export class ReportItemService {
                 return this.validateDate(item);
             }
             case ReportItemType.training:
-                validateTraining(item);
+                return validateTraining(item);
             case ReportItemType.transport:
             case ReportItemType.travel: {
                 const validatedReceipt = validateReceipt(item);

@@ -16,8 +16,8 @@
       "dom"
     ],
     "noUnusedLocals": true,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": false,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
     "noImplicitThis": false,
     "noImplicitAny": false,
     "noImplicitReturns": false,

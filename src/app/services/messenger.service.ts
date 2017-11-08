@@ -18,7 +18,7 @@ class ReportApprovedMessenger implements Messenger {
 }
 
 class ReportRejectMessenger implements Messenger {
-    deliveryMessage(report: Report, user: string) {
+    deliveryMessage(_report: Report, user: string) {
         console.log(`The user ${user} has reject one of your reports`);
     }
 }

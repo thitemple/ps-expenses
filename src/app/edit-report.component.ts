@@ -17,7 +17,7 @@ export class EditReportComponent extends BaseReportComponent {
     constructor(location: Location,
         dialog: MatDialog,
         reportDataService: ReportDataService,
-        private route: ActivatedRoute) {
+        route: ActivatedRoute) {
         super(location, dialog, reportDataService);
 
         route
@@ -31,17 +31,12 @@ export class EditReportComponent extends BaseReportComponent {
     }
 
     save(): void {
-        this.route
-            .queryParamMap
-            .switchMap(params => params.get('user'))
-            .subscribe(user => {
-                const modifiedReport = {
-                    ...this.report,
-                    description: this.description,
-                    items: this.itemsDataBase.data
-                };
-                this.reportDataService.save(modifiedReport);
-            });
-            this.location.back();
+        const modifiedReport = {
+            ...this.report,
+            description: this.description,
+            items: this.itemsDataBase.data
+        };
+        this.reportDataService.save(modifiedReport);
+        this.location.back();
     }
 }

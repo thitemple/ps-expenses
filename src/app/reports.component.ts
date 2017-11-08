@@ -24,7 +24,7 @@ export class ReportsDataSource extends DataSource<any> {
     disconnect() { }
 }
 
-function mapUser(params: ParamMap, index: number): boolean {
+function mapUser(params: ParamMap): boolean {
     const userName = params.get('user') || '';
     return userName.indexOf('admin') > -1;
 }
