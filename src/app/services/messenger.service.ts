@@ -31,6 +31,8 @@ function getMessenger(event: string): Messenger {
             return new ReportApprovedMessenger();
         case 'MessengerReportRejected':
             return new ReportRejectMessenger();
+        default:
+            throw new Error(`No Messenger found for the event ${event}`);
     }
 }
 

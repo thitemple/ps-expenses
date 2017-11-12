@@ -27,10 +27,11 @@ function validateReceipt(item: ReportItem): string {
     return item.hasReceipt ? '' : 'The item must have a receipt';
 }
 
-function validateTraining(item: ReportItem): string {
+function validateTraining(item: ReportItem) {
     if (item.amount < 50 && !item.hasReceipt) {
         return '';
     }
+    return 'Training items need a receipt for amounts over $50';
 }
 
 const validateDate = (minDate: Date, maxDate: Date) => (item): string => {
