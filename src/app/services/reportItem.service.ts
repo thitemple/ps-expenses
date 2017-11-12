@@ -34,7 +34,7 @@ function validateTraining(item: ReportItem) {
     return 'Training items need a receipt for amounts over $50';
 }
 
-const validateDate = (minDate: Date, maxDate: Date) => (item): string => {
+const validateDate = (minDate: Date, maxDate: Date) => (item: ReportItem): string => {
     return +item.date >= +minDate && +item.date <= +maxDate ? '' : 'The date is invalid';
 };
 

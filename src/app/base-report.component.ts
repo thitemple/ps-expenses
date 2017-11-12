@@ -48,13 +48,7 @@ class ReportItemDatabase {
     }
 
     addReportItem(item: ReportItem) {
-        let newData = [];
-
-        this.data.forEach(element => {
-            newData.push(element);
-        });
-        newData.push(item);
-
+        const newData = [...this.data, item];
         this.dataChange.next(newData);
     }
 
