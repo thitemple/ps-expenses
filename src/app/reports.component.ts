@@ -57,18 +57,18 @@ export class ReportsComponent {
 
     approve(report: Report) {
         this.toggleApproval(report, true);
-        this.toggleApprovedStyle(report.id, true);
+        this.toggleApprovedStyle(report.id!, true);
     }
 
     reject(report: Report) {
         this.toggleApproval(report, false);
-        this.toggleApprovedStyle(report.id, false);
+        this.toggleApprovedStyle(report.id!, false);
     }
 
 
     private toggleApprovedStyle(reportId: number, approved: boolean) {
         setTimeout(() => {
-            const row = this._window.document.getElementById(`report$${reportId}`).closest("mat-row");
+            const row = this._window.document.getElementById(`report$${reportId}`)!.closest("mat-row");
             toggleApprovedStyle.call(row, approved);
         }, 50);
     }
@@ -78,7 +78,12 @@ export class ReportsComponent {
         this.route
             .queryParamMap
             .take(1)
-            .subscribe(params => this.reportDataService.toggleApproval(report, params.get('user')));
+            .map(params => params.get('user'))
+            .subscribe(user => {
+                if (user) {
+                    this.reportDataService.toggleApproval(report, user);
+                }
+            });
         
     }
 }

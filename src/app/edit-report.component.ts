@@ -22,11 +22,15 @@ export class EditReportComponent extends BaseReportComponent {
 
         route
             .paramMap
-            .switchMap(params => reportDataService.getReport(+params.get('id')))
+            .switchMap(params => reportDataService.getReport(+params.get('id')!))
             .subscribe(report => {
-                this.description = report.description;
-                this.itemsDataBase.addRange(report.items);
-                this.report = report;
+                if (report) {
+                    this.description = report.description;
+                    this.itemsDataBase.addRange(report.items);
+                    this.report = report;
+                } else {
+                    console.error('No report found for the specified id');
+                }
             });
     }
 
