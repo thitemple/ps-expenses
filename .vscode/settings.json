@@ -2,5 +2,7 @@
     "cSpell.words": [
         "Injectable"
     ],
+    "git.enabled": false,
+    "editor.fontSize": 16,
     "typescript.tsdk": "node_modules\\typescript\\lib"
 }
