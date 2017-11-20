@@ -12,10 +12,11 @@ class ReportCreatedMessenger implements Messenger {
 }
 
 class ReportApprovedMessenger implements Messenger {
-    deliveryMessage(report: Report) {
+    deliveryMessage(report: Report, user: string) {
         console.log(`The report id: ${report.id} is now ${report.approved ? 'approved' : 'rejected'}`);
     }
 }
+    
 
 class ReportRejectMessenger implements Messenger {
     deliveryMessage(report: Report, user: string) {

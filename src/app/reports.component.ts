@@ -31,13 +31,14 @@ function mapUser(params: ParamMap, index: number): boolean {
     return userName.indexOf('admin') > -1;
 }
 
-function toggleApprovedStyle(this: HTMLElement, approved: boolean) {
+function toggleApprovedStyle(approved: boolean) {
     if (approved && this.className.indexOf('approved') === -1) {
         this.className += ' approved';
     } else {
         this.className = this.className.replace('approved', '');
     }
 }
+
 
 @Component({
     selector: 'ps-reports',
@@ -77,10 +78,10 @@ export class ReportsComponent {
 
     private toggleApproval(report: Report, approved: boolean) {
         report.approved = approved;
-        const user = this.route
+        this.route
             .queryParamMap
             .take(1)
-            .subscribe(params => this.reportDataService.toggleApproval(report, params.get('user')));
-        
+            .map(params => params.get('user'))
+            .subscribe(user => this.reportDataService.toggleApproval(report, user));        
     }
 }
