@@ -12,14 +12,14 @@ class ReportCreatedMessenger implements Messenger {
 }
 
 class ReportApprovedMessenger implements Messenger {
-    deliveryMessage(report: Report, user: string) {
+    deliveryMessage(report: Report) {
         console.log(`The report id: ${report.id} is now ${report.approved ? 'approved' : 'rejected'}`);
     }
 }
     
 
 class ReportRejectMessenger implements Messenger {
-    deliveryMessage(report: Report, user: string) {
+    deliveryMessage(_report: Report, user: string) {
         console.log(`The user ${user} has reject one of your reports`);
     }
 }
@@ -32,6 +32,8 @@ function getMessenger(event: string): Messenger {
             return new ReportApprovedMessenger();
         case 'MessengerReportRejected':
             return new ReportRejectMessenger();
+        default:
+            throw new Error('Messenger not found');
     }
 }
 

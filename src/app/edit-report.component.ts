@@ -17,31 +17,29 @@ export class EditReportComponent extends BaseReportComponent {
     constructor(location: Location,
         dialog: MatDialog,
         reportDataService: ReportDataService,
-        private route: ActivatedRoute) {
+        route: ActivatedRoute) {
         super(location, dialog, reportDataService);
 
         route
             .paramMap
-            .switchMap(params => reportDataService.getReport(+params.get('id')))
+            .switchMap(params => reportDataService.getReport(+params.get('id')!))
             .subscribe(report => {
-                this.description = report.description;
-                this.itemsDataBase.addRange(report.items);
-                this.report = report;
+                if (report) {
+                    this.description = report.description;
+                    this.itemsDataBase.addRange(report.items);
+                    this.report = report;
+                } else {
+                    console.log("report is undefined")
+                }
             });
     }
 
     save(): void {
-        this.route
-            .queryParamMap
-            .switchMap(params => params.get('user'))
-            .subscribe(user => {
-                const modifiedReport = {
-                    ...this.report,
-                    description: this.description,
-                    items: this.itemsDataBase.data
-                };
-                this.reportDataService.save(modifiedReport);
-            });
-            this.location.back();
+        const modifiedReport = {
+            ...this.report,
+            description: this.description,
+            items: this.itemsDataBase.data
+        };
+        this.reportDataService.save(modifiedReport);
     }
 }

@@ -31,9 +31,10 @@ function validateTraining(item: ReportItem): string {
     if (item.amount < 50 && !item.hasReceipt) {
         return '';
     }
+    return 'A training item with a value greater than $50 must have a receipt';
 }
 
-const validateDate = (minDate: Date, maxDate: Date) => (item): string => {
+const validateDate = (minDate: Date, maxDate: Date) => (item: ReportItem): string => {
     return +item.date >= +minDate && +item.date <= +maxDate ? '' : 'The date is invalid';
 };
 
@@ -59,7 +60,7 @@ export class ReportItemService {
                 return this.validateDate(item);
             }
             case ReportItemType.training:
-                validateTraining(item);
+                return validateTraining(item);
             case ReportItemType.transport:
             case ReportItemType.travel: {
                 const validatedReceipt = validateReceipt(item);

@@ -7,8 +7,6 @@ import {
   MatTabsModule,
   MatTableModule,
   MatIconModule,
-  MatSliderModule,
-  MatSidenavModule,
   MatCardModule,
   MatInputModule,
   MatToolbarModule,
@@ -18,7 +16,6 @@ import {
   MatDatepickerModule,
   MatNativeDateModule
 } from '@angular/material';
-import { RouterModule } from '@angular/router';
 
 import { PsRootComponent } from './root.component';
 import { CreateReportComponent } from './create-report.component';
@@ -31,11 +28,12 @@ import { WindowService } from './services/window.service';
 import { MessengerWatcher } from './services/messenger.service';
 import { EditReportComponent } from './edit-report.component';
 
-export const initApp = messengerWatcher => () => {
+export const initApp = (messengerWatcher: MessengerWatcher) => () => {
   messengerWatcher.watch();
 }
 
-export const initMessengerWatcher = reportDataService => new MessengerWatcher(reportDataService);
+export const initMessengerWatcher = (reportDataService: ReportDataService) =>
+  new MessengerWatcher(reportDataService);
 
 @NgModule({
   declarations: [

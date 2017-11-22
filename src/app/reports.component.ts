@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
@@ -26,12 +25,12 @@ export class ReportsDataSource extends DataSource<any> {
     disconnect() { }
 }
 
-function mapUser(params: ParamMap, index: number): boolean {
+function mapUser(params: ParamMap): boolean {
     const userName = params.get('user') || '';
     return userName.indexOf('admin') > -1;
 }
 
-function toggleApprovedStyle(approved: boolean) {
+function toggleApprovedStyle(this: HTMLElement, approved: boolean) {
     if (approved && this.className.indexOf('approved') === -1) {
         this.className += ' approved';
     } else {
@@ -49,7 +48,6 @@ export class ReportsComponent {
     reports: ReportsDataSource;
     isAdmin = Observable.of(false);
     displayedColumns = ['id', 'description', 'date', 'amount', 'approved', 'actions'];
-    private isLoading: boolean;
 
     constructor(private route: ActivatedRoute,
         private reportDataService: ReportDataService,
@@ -60,18 +58,18 @@ export class ReportsComponent {
 
     approve(report: Report) {
         this.toggleApproval(report, true);
-        this.toggleApprovedStyle(report.id, true);
+        this.toggleApprovedStyle(report.id!, true);
     }
 
     reject(report: Report) {
         this.toggleApproval(report, false);
-        this.toggleApprovedStyle(report.id, false);
+        this.toggleApprovedStyle(report.id!, false);
     }
 
 
     private toggleApprovedStyle(reportId: number, approved: boolean) {
-        setTimeout(function () {
-            const row = this._window.document.getElementById(`report$${reportId}`).closest("mat-row");
+        setTimeout(() => {
+            const row = this._window.document.getElementById(`report$${reportId}`)!.closest("mat-row");
             toggleApprovedStyle.call(row, approved);
         }, 50);
     }
@@ -82,6 +80,10 @@ export class ReportsComponent {
             .queryParamMap
             .take(1)
             .map(params => params.get('user'))
-            .subscribe(user => this.reportDataService.toggleApproval(report, user));        
+            .subscribe(user => {
+                if (user) {
+                    this.reportDataService.toggleApproval(report, user);
+                }
+            });        
     }
 }

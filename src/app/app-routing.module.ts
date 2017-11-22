@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PsRootComponent } from './root.component';
 import { ReportsComponent } from './reports.component';
 import { CreateReportComponent } from './create-report.component';
 import { EditReportComponent } from './edit-report.component';

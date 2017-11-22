@@ -32,16 +32,14 @@ export class ReportDataService {
         return this.dataChange.value;
     }
 
-    getReport(reportId: number): Promise<Report> {
-        return this.data.some(r => r.id === reportId) ?
-            Promise.resolve(this.data.find(r => r.id === reportId)) :
-            Promise.resolve(undefined);
+    getReport(reportId: number): Promise<Report | undefined> {
+        return Promise.resolve(this.data.find(r => r.id === reportId));
     }
 
     add(report: Report) {
         const newReport = {
             ...report,
-            id: this.data.reduce((biggestId, rep) => biggestId > rep.id ? biggestId : rep.id, 0) + 1,
+            id: this.data.reduce((biggestId, rep) => biggestId > rep.id! ? biggestId : rep.id!, 0) + 1,
             amount: report.items.reduce((sum, item) => sum + item.amount, 0)
         };
         const newData = [...this.data, newReport];
