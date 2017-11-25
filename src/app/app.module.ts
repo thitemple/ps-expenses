@@ -32,7 +32,8 @@ export const initApp = (messengerWatcher: MessengerWatcher) => () => {
   messengerWatcher.watch();
 }
 
-export const initMessengerWatcher = (reportDataService: ReportDataService) => new MessengerWatcher(reportDataService);
+export const initMessengerWatcher = (reportDataService: ReportDataService) =>
+  new MessengerWatcher(reportDataService);
 
 @NgModule({
   declarations: [

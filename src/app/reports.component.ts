@@ -38,6 +38,7 @@ function toggleApprovedStyle(this: HTMLElement, approved: boolean) {
     }
 }
 
+
 @Component({
     selector: 'ps-reports',
     templateUrl: './reports.component.html',
@@ -83,7 +84,6 @@ export class ReportsComponent {
                 if (user) {
                     this.reportDataService.toggleApproval(report, user);
                 }
-            });
-        
+            });        
     }
 }
