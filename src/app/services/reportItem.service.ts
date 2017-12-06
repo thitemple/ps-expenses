@@ -16,6 +16,16 @@ export type ReportItem = {
     date: Date;
 };
 
+function validateRequired(item: ReportItem): boolean {
+    const exclude: (keyof ReportItem)[] = ['hasReceipt']
+    return Object.keys(item).reduce((isValid, memberKey: keyof ReportItem) => {
+        if (!isValid) {
+            return isValid;
+        }
+        return exclude.includes(memberKey) || !!item[memberKey];
+    }, true);
+}
+
 function validateFoodItem(item: ReportItem): string {
     if (item.amount >= 50 && !item.hasReceipt) {
         return 'A food item with a value greater than $50 must have a receipt';
@@ -51,6 +61,9 @@ export class ReportItemService {
     }
 
     isValid(item: ReportItem): string {
+        if(!validateRequired(item)) {
+            return 'Some of the required fields where not filled.'
+        }
         switch (item.type) {
             case ReportItemType.food: {
                 const validatedFood = validateFoodItem(item);
