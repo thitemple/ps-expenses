@@ -5,13 +5,15 @@ import { WindowService } from './window.service';
 import { Subject } from 'rxjs/Subject';
 
 export type Report = {
-    id?: number;
+    id: number;
     date: Date;
     approved: boolean;
     description: string;
     items: ReportItem[];
-    amount?: number;
+    amount: number;
 };
+
+export type NewReport = Pick<Report, 'date' | 'approved' | 'description' | 'items'>;
 
 const psReportsKey = 'ps-reports';
 
@@ -36,10 +38,10 @@ export class ReportDataService {
         return Promise.resolve(this.data.find(r => r.id === reportId));
     }
 
-    add(report: Report) {
+    add(report: NewReport) {
         const newReport = {
             ...report,
-            id: this.data.reduce((biggestId, rep) => biggestId > rep.id! ? biggestId : rep.id!, 0) + 1,
+            id: this.data.reduce((biggestId, rep) => biggestId > rep.id ? biggestId : rep.id, 0) + 1,
             amount: report.items.reduce((sum, item) => sum + item.amount, 0)
         };
         const newData = [...this.data, newReport];

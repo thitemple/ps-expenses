@@ -58,12 +58,12 @@ export class ReportsComponent {
 
     approve(report: Report) {
         this.toggleApproval(report, true);
-        this.toggleApprovedStyle(report.id!, true);
+        this.toggleApprovedStyle(report.id, true);
     }
 
     reject(report: Report) {
         this.toggleApproval(report, false);
-        this.toggleApprovedStyle(report.id!, false);
+        this.toggleApprovedStyle(report.id, false);
     }
 
 

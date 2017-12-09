@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material';
-import { ReportDataService, Report } from './services/reportData.service';
+import { ReportDataService, NewReport } from './services/reportData.service';
 import 'rxjs/add/operator/switchMap';
 import { BaseReportComponent } from './base-report.component';
 
@@ -20,7 +20,7 @@ export class CreateReportComponent extends BaseReportComponent {
     }
 
     save(): void {
-        const newReport: Report = {
+        const newReport: NewReport = {
             date: new Date(),
             approved: false,
             description: this.description,
