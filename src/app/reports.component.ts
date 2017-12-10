@@ -8,7 +8,7 @@ import { ReportDataService } from './services/reportData.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { WindowService } from './services/window.service';
 import { Report, isRemoteDataOK, isRemoteDataError, isRemoteDataLoading } from './types';
-import {MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material';
 
 // export class ReportsDataSource extends DataSource<any> {
 
@@ -61,8 +61,8 @@ export class ReportsComponent {
                 this.reports.data = remoteData.data;
             } else if (isRemoteDataError(remoteData)) {
                 alert(remoteData.error);
-            } else if(isRemoteDataLoading(remoteData)) {
-                
+            } else if (isRemoteDataLoading(remoteData)) {
+
             }
         });
     }
@@ -75,12 +75,6 @@ export class ReportsComponent {
     reject(report: Report) {
         this.toggleApproval(report, false);
         this.toggleApprovedStyle(report.id, false);
-    }
-
-    search(text: string) {
-        this.reportDataService.search(text).then(reports => {
-            console.table(reports);
-        });
     }
 
     private toggleApprovedStyle(reportId: number, approved: boolean) {
@@ -100,6 +94,6 @@ export class ReportsComponent {
                 if (user) {
                     this.reportDataService.toggleApproval(report, user);
                 }
-            });        
+            });
     }
 }

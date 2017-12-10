@@ -58,24 +58,6 @@ export class ReportDataService {
         }
     }
 
-    search(description: string): Promise<Report[]> {
-        if (isRemoteDataOK(this.remoteData)) {
-            if (!description) {
-                return Promise.resolve(this.remoteData.data);
-            }
-            
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    if (isRemoteDataOK(this.remoteData)) {
-                        resolve(this.remoteData.data.filter(report => report.description.includes(description)));
-                    }
-                }, 2000);
-            });
-
-        }
-        return Promise.resolve([]);
-    }
-
     private updateData(reports: Report[]) {
         this._window.localStorage.setItem(PS_REPORTS_KEY, JSON.stringify(reports));
         this.dataChange.next({ kind: "ok", data: reports });
