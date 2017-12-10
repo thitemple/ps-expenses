@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material';
-import { ReportDataService, NewReport } from './services/reportData.service';
+import { ReportDataService } from './services/reportData.service';
 import 'rxjs/add/operator/switchMap';
 import { BaseReportComponent } from './base-report.component';
+import { NewReport } from './types';
 
 @Component({
     selector: 'ps-report',

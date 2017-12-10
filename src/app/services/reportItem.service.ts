@@ -1,20 +1,5 @@
 import { Injectable } from '@angular/core';
-
-export enum ReportItemType {
-    food = 'Food',
-    travel = 'Travel',
-    training = 'Training',
-    transport = 'Transport',
-    unselected = ''
-}
-
-export type ReportItem = {
-    description: string;
-    amount: number;
-    hasReceipt: boolean;
-    type: ReportItemType;
-    date: Date;
-};
+import { ReportItem, ReportItemType } from '../types';
 
 function validateRequired(item: ReportItem): boolean {
     const exclude: (keyof ReportItem)[] = ['hasReceipt']

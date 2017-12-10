@@ -1,29 +1,30 @@
 import { Component, Inject } from '@angular/core';
-import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
-import { Report, ReportDataService } from './services/reportData.service';
+import { ReportDataService } from './services/reportData.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { WindowService } from './services/window.service';
+import { Report, isRemoteDataOK, isRemoteDataError, isRemoteDataLoading } from './types';
+import {MatTableDataSource} from '@angular/material';
 
-export class ReportsDataSource extends DataSource<any> {
+// export class ReportsDataSource extends DataSource<any> {
 
-    constructor(private dataSource: ReportDataService) {
-        super();
-    }
+//     constructor(private dataSource: ReportDataService) {
+//         super();
+//     }
 
-    connect(): Observable<Report[]> {
-        return this
-            .dataSource
-            .dataChange
-            .map(data => data);
-    }
+//     connect(): Observable<Report[]> {
+//         return this
+//             .dataSource
+//             .dataChange
+//             .map(data => data);
+//     }
 
-    disconnect() { }
-}
+//     disconnect() { }
+// }
 
 function mapUser(params: ParamMap): boolean {
     const userName = params.get('user') || '';
@@ -45,15 +46,25 @@ function toggleApprovedStyle(this: HTMLElement, approved: boolean) {
     styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent {
-    reports: ReportsDataSource;
+    reports: MatTableDataSource<Report>;
     isAdmin = Observable.of(false);
     displayedColumns = ['id', 'description', 'date', 'amount', 'approved', 'actions'];
 
     constructor(private route: ActivatedRoute,
         private reportDataService: ReportDataService,
         @Inject(WindowService) private _window: Window) {
-        this.reports = new ReportsDataSource(reportDataService);
+        this.reports = new MatTableDataSource([]);
         this.isAdmin = this.route.queryParamMap.map(mapUser);
+
+        reportDataService.dataChange.subscribe(remoteData => {
+            if (isRemoteDataOK(remoteData)) {
+                this.reports.data = remoteData.data;
+            } else if (isRemoteDataError(remoteData)) {
+                alert(remoteData.error);
+            } else if(isRemoteDataLoading(remoteData)) {
+                
+            }
+        });
     }
 
     approve(report: Report) {
@@ -66,6 +77,11 @@ export class ReportsComponent {
         this.toggleApprovedStyle(report.id, false);
     }
 
+    search(text: string) {
+        this.reportDataService.search(text).then(reports => {
+            console.table(reports);
+        });
+    }
 
     private toggleApprovedStyle(reportId: number, approved: boolean) {
         setTimeout(() => {

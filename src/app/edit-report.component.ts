@@ -3,8 +3,9 @@ import { MatDialog } from "@angular/material";
 import { Location } from '@angular/common';
 import { ActivatedRoute } from "@angular/router";
 
-import { ReportDataService, Report } from "./services/reportData.service";
+import { ReportDataService } from "./services/reportData.service";
 import { BaseReportComponent } from "./base-report.component";
+import { Report } from "./types";
 
 @Component({
     selector: 'ps-report',

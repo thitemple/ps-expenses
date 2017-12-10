@@ -6,7 +6,7 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 import { ReportDataService } from "./services/reportData.service";
 import { CreateReportItemDialogComponent } from "./create-report-item.component";
-import { ReportItem } from "./services/reportItem.service";
+import { ReportItem } from "./types";
 
 export abstract class BaseReportComponent {
     abstract title: string;

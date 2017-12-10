@@ -1,8 +1,5 @@
-import { ReportDataService, Report } from "./reportData.service";
-
-interface Messenger {
-    deliveryMessage(report: Report, user: string): void;
-}
+import { ReportDataService } from "./reportData.service";
+import { Report, Messenger } from "../types";
 
 class ReportCreatedMessenger implements Messenger {
     deliveryMessage(report: Report, user: string): void {

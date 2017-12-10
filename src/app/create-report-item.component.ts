@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { ReportItem, ReportItemType, ReportItemService } from './services/reportItem.service';
+import { ReportItemService } from './services/reportItem.service';
+import { ReportItem, ReportItemType } from './types';
 
 @Component({
     selector: 'ps-create-report-item',

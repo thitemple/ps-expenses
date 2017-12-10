@@ -2,6 +2,10 @@
 
 <h1 class="mat-h1">Reports</h1>
 
+<mat-form-field class="field-full-width">
+    <input #searchBox matInput placeholder="Search..." (keyup.enter)="search(searchBox.value)">
+</mat-form-field>
+
 <mat-table #table [dataSource]="reports" id="reports-list">
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
