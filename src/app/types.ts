@@ -47,10 +47,10 @@ type RemoteDataError = {
     error: string;
 };
 
-export type RemoteData<TOK> =
+export type RemoteData<T> =
     RemoteDataNotFetched | 
     RemoteDataLoading |
-    RemoteDataOK<TOK> |
+    RemoteDataOK<T> |
     RemoteDataError;
 
 export function isRemoteDataOK<T>(remoteData: RemoteData<T>): remoteData is RemoteDataOK<T> {

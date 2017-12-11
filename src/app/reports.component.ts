@@ -62,7 +62,7 @@ export class ReportsComponent {
             } else if (isRemoteDataError(remoteData)) {
                 alert(remoteData.error);
             } else if (isRemoteDataLoading(remoteData)) {
-
+                // show the user some feedback on loading data
             }
         });
     }

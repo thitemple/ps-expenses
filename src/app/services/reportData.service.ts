@@ -79,6 +79,6 @@ export class ReportDataService {
                     error: 'The were was an issue loading the data'
                 })
             }
-        }, 2000);
+        }, 1000);
     }
 }
