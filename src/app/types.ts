@@ -14,6 +14,7 @@ export enum ReportItemType {
     travel = 'Travel',
     training = 'Training',
     transport = 'Transport',
+    officeSupplies = 'Office Supplies',
     unselected = ''
 }
 

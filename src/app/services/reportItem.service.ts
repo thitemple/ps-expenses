@@ -59,6 +59,7 @@ export class ReportItemService {
             }
             case ReportItemType.training:
                 return validateTraining(item);
+            case ReportItemType.officeSupplies:
             case ReportItemType.transport:
             case ReportItemType.travel: {
                 const validatedReceipt = validateReceipt(item);
@@ -68,8 +69,7 @@ export class ReportItemService {
                 return this.validateDate(item);
             }
             case ReportItemType.unselected:
-            default:
-                return 'The item type is not supported';
+                return 'Please select an item type';
         }
     }
 }

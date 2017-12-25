@@ -7,24 +7,8 @@ import 'rxjs/add/operator/take';
 import { ReportDataService } from './services/reportData.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { WindowService } from './services/window.service';
-import { Report, isRemoteDataOK, isRemoteDataError, isRemoteDataLoading } from './types';
+import { Report, RemoteData } from './types';
 import { MatTableDataSource } from '@angular/material';
-
-// export class ReportsDataSource extends DataSource<any> {
-
-//     constructor(private dataSource: ReportDataService) {
-//         super();
-//     }
-
-//     connect(): Observable<Report[]> {
-//         return this
-//             .dataSource
-//             .dataChange
-//             .map(data => data);
-//     }
-
-//     disconnect() { }
-// }
 
 function mapUser(params: ParamMap): boolean {
     const userName = params.get('user') || '';
@@ -57,14 +41,25 @@ export class ReportsComponent {
         this.isAdmin = this.route.queryParamMap.map(mapUser);
 
         reportDataService.dataChange.subscribe(remoteData => {
-            if (isRemoteDataOK(remoteData)) {
-                this.reports.data = remoteData.data;
-            } else if (isRemoteDataError(remoteData)) {
-                alert(remoteData.error);
-            } else if (isRemoteDataLoading(remoteData)) {
-                // show the user some feedback on loading data
-            }
+            this.handleDataChanged(remoteData);
         });
+    }
+
+    handleDataChanged(remoteData: RemoteData<Report[]>): string {
+        switch(remoteData.kind) {
+            case 'ok':
+                this.reports.data = remoteData.data;
+                return remoteData.kind;
+            case 'error':
+                alert(remoteData.error);
+                return remoteData.kind;
+            case 'loading':
+                // display loading spinner;
+                return remoteData.kind;
+            case 'notFetched':
+                // display initial page;
+                return remoteData.kind;
+        }
     }
 
     approve(report: Report) {
@@ -79,7 +74,7 @@ export class ReportsComponent {
 
     private toggleApprovedStyle(reportId: number, approved: boolean) {
         setTimeout(() => {
-            const row = this._window.document.getElementById(`report$${reportId}`)!.closest("mat-row");
+            const row = this._window.document.getElementById(`report$${reportId}`)!.closest('mat-row');
             toggleApprovedStyle.call(row, approved);
         }, 50);
     }

@@ -21,7 +21,12 @@ class ReportRejectMessenger implements Messenger {
     }
 }
 
-function getMessenger(event: string): Messenger {
+type MessengerEventsHandled = 
+    'MessengerReportCreated' |
+    'MessengerReportApproved' |
+    'MessengerReportRejected';
+
+function getMessenger(event: MessengerEventsHandled): Messenger {
     switch (event) {
         case 'MessengerReportCreated':
             return new ReportCreatedMessenger();
@@ -29,8 +34,6 @@ function getMessenger(event: string): Messenger {
             return new ReportApprovedMessenger();
         case 'MessengerReportRejected':
             return new ReportRejectMessenger();
-        default:
-            throw new Error('Messenger not found');
     }
 }
 
@@ -48,7 +51,10 @@ export class MessengerWatcher {
             .ReportDataService
             .reportApprovedReject
             .subscribe(({ report, user }) => {
-                getMessenger(`MessengerReport${report.approved ? 'Approved' : 'Rejected'}`)
+                const eventType = report.approved ? 
+                    'MessengerReportApproved' :
+                    'MessengerReportRejected';
+                getMessenger(eventType)
                     .deliveryMessage(report, user);
             });
     }

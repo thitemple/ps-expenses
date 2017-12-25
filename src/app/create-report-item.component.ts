@@ -21,6 +21,7 @@ export class CreateReportItemDialogComponent {
     itemTypeOptions: ReportItemType[] = [
         ReportItemType.unselected,
         ReportItemType.food,
+        ReportItemType.officeSupplies,
         ReportItemType.training,
         ReportItemType.transport,
         ReportItemType.travel
