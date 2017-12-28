@@ -4,6 +4,20 @@ import { Subject } from 'rxjs/Subject';
 import { Report, NewReport, PS_REPORTS_KEY, RemoteData, isRemoteDataOK } from '../types';
 import { WindowService } from './window.service';
 
+declare global {
+    interface Array<T> {
+        filterWith<TKey extends keyof T, TValue extends T[TKey]>(member: TKey, value: TValue): T[];
+    }
+}
+
+Array.prototype.filterWith = function<T, TKey extends keyof T, TValue extends T[TKey]>(this: T[], member: TKey, value: TValue): T[] {
+    return this.filter(x => x[member] === value);
+}
+
+const reports: Report[] = [];
+reports.filterWith('approved', true);
+
+
 @Injectable()
 export class ReportDataService {
     dataChange = new BehaviorSubject<RemoteData<Report[]>>({ kind: "notFetched" });
@@ -60,6 +74,7 @@ export class ReportDataService {
 
     private updateData(reports: Report[]) {
         this._window.localStorage.setItem(PS_REPORTS_KEY, JSON.stringify(reports));
+        this._window.psExpenses = JSON.stringify(reports);
         this.dataChange.next({ kind: "ok", data: reports });
     }
 
